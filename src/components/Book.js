@@ -1,14 +1,14 @@
 import React from 'react';
 
 const Book = ({ book }) => {
-  const { title, authors, imageUrl } = book;
-
+  const { title, authors, imageLinks, shelf } = book;
+  const thumbnail = imageLinks.thumbnail;
   return (
     <div className="book">
       <div className="book-top">
-        <div className="book-cover" style={{ width: 128, height: 192, backgroundImage: `url(${imageUrl})` }}/>
+        <div className="book-cover" style={{ width: 128, height: 192, backgroundImage: `url(${thumbnail})` }}/>
         <div className="book-shelf-changer">
-          <select>
+          <select defaultValue={shelf}>
             <option value="none" disabled>Move to...</option>
             <option value="currentlyReading">Currently Reading</option>
             <option value="wantToRead">Want to Read</option>
@@ -18,7 +18,7 @@ const Book = ({ book }) => {
         </div>
       </div>
       <div className="book-title">{title}</div>
-      <div className="book-authors">{authors}</div>
+      <div className="book-authors">{authors && authors.join(', ')}</div>
     </div>
   );
 }
