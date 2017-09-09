@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const Book = ({ book }) => {
   const { title, authors, imageLinks, shelf } = book;
@@ -21,6 +22,10 @@ const Book = ({ book }) => {
       <div className="book-authors">{authors && authors.join(', ')}</div>
     </div>
   );
+}
+
+Book.propTypes = {
+  book: PropTypes.object.isRequired,
 }
 
 export default Book;
