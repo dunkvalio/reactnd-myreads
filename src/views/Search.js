@@ -11,11 +11,19 @@ class Search extends React.Component {
   }
 
   componentWillReceiveProps({ bookIndex }) {
+    /**
+     * The 'shelf' prop of each book from the 'books' state needs to be updated
+     * from the incomming 'bookIndex' component prop in order to keep the UI in sync.
+     */
     this.setState({
       books: this.state.books.map(book => this.syncBookShelf(book, bookIndex)),
     });
   }
 
+  /**
+   * Updates the 'shelf' property of a book
+   * with the value from the current Book Index or 'none' if missing.
+   */
   syncBookShelf = (book, index) => {
     book.shelf = index[book.id] ||  'none';
     return book;
@@ -24,7 +32,10 @@ class Search extends React.Component {
   searchBooks = () => {
     const query = this.refs.searchInput.value;
     if(query) {
-      const { bookIndex } = this.props;
+      /**
+       * Books need to have their 'shelf' property updated,
+       * since it is missing from the response when call ing BooksAPI.search
+       */
       api.search(query)
         .then(books => books.map(book => this.syncBookShelf(book, bookIndex)))
         .then(books => this.setState({ books }))
@@ -44,6 +55,10 @@ class Search extends React.Component {
               type="text"
               ref="searchInput"
               placeholder="Search by title or author"
+              /**
+               * In case of multiple events call the provided function only once
+               * when the provided time in Milliseconds has elapsed following the last event
+               */
               onChange={_.debounce(this.searchBooks, 200)}
             />
           </div>

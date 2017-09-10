@@ -10,6 +10,7 @@ const shelves = {
 }
 
 class Book extends React.Component {
+
   addBookToShelf = (event) => {
     const { book, onUpdate } = this.props;
     const shelf = event.target.value;

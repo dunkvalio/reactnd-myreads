@@ -7,8 +7,8 @@ import './App.css';
 
 class BooksApp extends React.Component {
   state = {
-    bookIndex: {},
     library: [],
+    bookIndex: {},
   }
 
   componentDidMount() {
@@ -20,6 +20,11 @@ class BooksApp extends React.Component {
   }
 
   onLibraryUpdate = (books) => {
+    /**
+     * Do 2 updates to the state for better UX.
+     * First: update the 'library' array of books in case it affects the current page in view.
+     * Second: update the 'bookIndex' Object used to sync the Shelf options for the Books in the Search page.
+     */
     this.setState({ library: books });
     this.setState({
       bookIndex: books.reduce((index, book) => {
