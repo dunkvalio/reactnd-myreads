@@ -8,7 +8,6 @@ import Book from '../components/Book';
 class Search extends React.Component {
   state = {
     books: [],
-    updatedBooks: false,
   }
 
   componentWillReceiveProps({ bookIndex }) {
@@ -17,19 +16,9 @@ class Search extends React.Component {
     });
   }
 
-  componentWillUnmount() {
-    if (this.state.updatedBooks) {
-      this.props.onBooksUpdated();
-    }
-  }
-
   syncBookShelf = (book, index) => {
     book.shelf = index[book.id] ||  'none';
     return book;
-  }
-
-  onBookShelfUpdated = () => {
-    this.setState({ updatedBooks: true });
   }
 
   searchBooks = () => {
@@ -63,7 +52,7 @@ class Search extends React.Component {
           <ol className="books-grid">
             {books && books.map(book => (
               <li key={book.id}>
-                <Book book={book} onUpdate={this.onBookShelfUpdated} />
+                <Book book={book} onUpdate={this.props.onBooksUpdated} />
               </li>
             ))}
           </ol>
