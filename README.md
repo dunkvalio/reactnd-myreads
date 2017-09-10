@@ -6,7 +6,9 @@ MyReads is a bookshelf app that allows you to select and categorize books you ha
 
 ## Dependencies
 [React Router v4](https://github.com/ReactTraining/react-router)
+
 [Prop Types](https://github.com/facebook/prop-types)
+
 [lodash](https://github.com/lodash/lodash)
 
 ## Setup
