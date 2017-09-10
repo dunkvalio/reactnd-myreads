@@ -32,6 +32,7 @@ class Search extends React.Component {
   searchBooks = () => {
     const query = this.refs.searchInput.value;
     if(query) {
+      const { bookIndex } = this.props;
       /**
        * Books need to have their 'shelf' property updated,
        * since it is missing from the response when call ing BooksAPI.search
